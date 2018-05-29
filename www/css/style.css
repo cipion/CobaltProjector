@@ -112,9 +112,7 @@ z-index: 9998!important;
 }
 
 
-a.btn {
-  width: 100%; 
-}
+
 
 .margin {
   margin: 25px 15px ; 
@@ -138,17 +136,33 @@ footer .container{
 .right_panel {()}
 
 .delete{
+	
 	margin: 5px;  
     
 }
 
 .titreElement
 {
+	display: block;
+	height: 100%;
+	width: 75%;
 	font-size: 30px;
 	height: 50px;
 	margin-left: 5%;
+	text-align: left;
+	color: white;
 	
 }
 
 
+.addButton
+{
+	margin: 5%;
+	text-align: right;
+}
+
+.calculBtn
+{
+	width: 50%;
+}
 

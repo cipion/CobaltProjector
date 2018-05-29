@@ -12,23 +12,24 @@
 		var data = {};
 		vm.ajouterProjecteur = ajouterProjecteur;
 		vm.suprimerProjecteur = suprimerProjecteur;
-			
-            $scope.elements = { "0": {
-				"id":"test",
-				"nom":"test"			
-			},
-			"1": {
-				"id":"test1",
-				"nom":"test1"			
-			},
-			"2": {
-				"id":"test1",
-				"nom":"test1"			
-			}
-			
-			}
 		
+		var elements = [
+				{
+					"id":"test",
+					"nom":"test"			
+				},
+				{
+					"id":"test1",
+					"nom":"test1"			
+				},
+				{
+					"id":"test2",
+					"nom":"test2"			
+				}
+			
+			]
 		
+		$scope.elements = angular.copy(elements);
 		
 			
 			
@@ -116,17 +117,13 @@
 			
 		};
 		
-		function suprimerProjecteur() {
+		function suprimerProjecteur(objectDelete) {
 			console.log('suppression');
 			//Ouverture de la fenêtre
-		var instanceModalSupprimer = $uibModal.open(dialogsuprimerProjecteur);
-		
-		
-		instanceModalSupprimer.result.then(function (pieceSupprimee) {
-			$scope.pieceSupprimee = 'La piece "' + pieceSupprimee.nom + '" a ete supprimee';
-				}, function () {
-			$log.info('Modal dismissed at: ' + new Date());
-			});
+			
+			delete elements.projecteurs[objectDelete];
+			// objectDelete.splice(index, 1);
+			$scope.elements = angular.copy(elements);
 		};
 		
 		
