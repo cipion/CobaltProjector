@@ -44,12 +44,12 @@
 			backdrop: true,
 			keyboard: true,
 			animation: true,			
-			controller: ['$scope', '$uibModalInstance', 'PieceService',
-				function($scope, $uibModalInstance, PieceService) { //Controller de la fenêtre. Il doit prend en paramètre tous les élèments du "resolve".
+			controller: ['$scope', '$uibModalInstance', 
+				function($scope, $uibModalInstance, elements) { //Controller de la fenêtre. Il doit prend en paramètre tous les élèments du "resolve".
 					$scope.ajouter = function() {
 						//On fait appel à la fonction du scope parent qui permet de supprimer l'élément.
 						//On peut également faire appel à un service de notre application.
-						
+						elements={"id":"test3", "nom":"test3"}
 						//Fermeture de la fenêtre modale
 						$uibModalInstance.close();
 					};
@@ -65,41 +65,7 @@
 			};
 			
 			
-		var dialogsuprimerProjecteur = {
-			templateUrl: 'dialog/suprimerProjecteur.dialog.html', // Url du template HTML
-			backdrop: true,
-			keyboard: true,
-			animation: false,			
-			controller: ['$scope', '$uibModalInstance', 'PieceService', 
-				function($scope, $uibModalInstance, PieceService) { //Controller de la fenêtre. Il doit prend en paramètre tous les élèments du "resolve".
-					 var $ctrl = this;
-					$scope.pieces = $cookies.getObject('pieces');
-					
-					$ctrl.selected = {};
-					
-					$scope.supprimer = function() {
-						//On fait appel à la fonction du scope parent qui permet de supprimer l'élément.
-						//On peut également faire appel à un service de notre application.
-						
-						//Fermeture de la fenêtre modale
-						$uibModalInstance.close($ctrl.selected.piece);
-					};
-					$scope.cancel = function() {
-						// Appel à la fonction d'annulation.
-						$uibModalInstance.dismiss('cancel');
-					};
-				}
-			],
-			controllerAs: '$ctrl',
-			resolve: {
-				
-			}
-			};
 			
-
-		
-		
-		
 		
 		/*******************************************************************
 								Function
@@ -113,7 +79,7 @@
 		function ajouterProjecteur() {
 			console.log('ajout');
 			//Ouverture de la fenêtre
-		$uibModal.open(dialogajouterProjecteur);
+			$uibModal.open(dialogajouterProjecteur);
 			
 		};
 		
@@ -121,8 +87,9 @@
 			console.log('suppression');
 			//Ouverture de la fenêtre
 			
-			delete elements.projecteurs[objectDelete];
-			// objectDelete.splice(index, 1);
+			// delete elements[objectDelete];
+			
+			elements.splice(objectDelete, 1);
 			$scope.elements = angular.copy(elements);
 		};
 		

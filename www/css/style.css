@@ -166,3 +166,10 @@ footer .container{
 	width: 50%;
 }
 
+.btnDialog
+{
+	margin-left: 2%;
+	margin-right: 2%;
+	width: 100%;
+	padding: 0;
+}
