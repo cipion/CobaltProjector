@@ -5,7 +5,7 @@
 
 	<div class="row">
 			<div class="input-field col s12">
-					<input  id="nomProjecteur" name="nomProjecteur" type="text"  placeholder="nom du Projecteur" ng-model="nomProjecteur" required>
+					<input  id="nomProjecteur" name="nomProjecteur" type="text"  placeholder="nom du Projecteur" ng-model="nomProjecteur"  required />
 					<span ng-show="nomProjecteur.$touched && nomProjecteur.$invalid">Le nom du projecteur est necessaire.</span>
 			</div>					
 	</div>
@@ -14,7 +14,7 @@
 <div class="modal-footer">
 	<div class="row">
 		<div class="col s6">
-			<button class="btn btn-small blue darken-3 btnDialog" ng-click="ajouter()">Confirmer</button>
+			<button class="btn btn-small blue darken-3 btnDialog" ng-click="ajouter()" ng-disabled="!nomProjecteur.length">Confirmer</button>
 		</div>
 		<div class="col s6">
 			<button class="btn btn-small red lighten-1 btnDialog" ng-click="cancel()">Annuler</button>
