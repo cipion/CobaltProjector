@@ -17,7 +17,7 @@
 		
 		
 		initList();
-		
+		// refresh();
 			
 			
 			
@@ -86,14 +86,13 @@
 		function refresh ()
 		{
 			$scope.elements = angular.copy(ProjecteurService.elements);
+			console.log($scope.elements);
 		}
 		
 		
 		function initList ()
 		{
-			ProjecteurService.openDatabase(function(){
-				refresh();
-			});
+			ProjecteurService.openDatabase(refresh);
 			
 		}
 		

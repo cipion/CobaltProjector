@@ -52,11 +52,15 @@
 		}
 		
 		
-		function openDatabase()
+		function openDatabase(resultat)
 		{
 			db = window.openDatabase("Database", "1.0", "Cordova Demo", 200000);
 			db.transaction(populateDB, errorCB, successCB);
-			showDocCount(db);
+			showDocCount(db, function() {
+				resultat();			
+			});
+			
+			
 		}
 		
 		function populateDB(tx) {
@@ -76,7 +80,7 @@
 			console.log("Succes de creation de la table");
 		}
 		
-		function showDocCount(db) {
+		function showDocCount(db, callback) {
 		db.readTransaction(function (t) {
 			t.executeSql('SELECT * FROM DEMO', [], function (t, r) {
 				var i;
@@ -85,7 +89,7 @@
 					addElement(r.rows[i]);
 					
 				}
-					
+				callback();	
 				
 			
 			}, function (t, e) {
