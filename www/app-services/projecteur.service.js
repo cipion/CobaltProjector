@@ -8,18 +8,34 @@
     ProjecteurService.$inject = [ '$http', '$cookies', '$rootScope', '$timeout'];
     function ProjecteurService($http, $cookies, $rootScope, $timeout) {
         var service = {};
+		var db;
 		
-		
-				
-		var db = window.openDatabase("Database", "1.0", "Cordova Demo", 200000);
-		db.transaction(populateDB, errorCB, successCB);
-        service.elements = angular.copy(showDocCount(db));
-		
-		
+		service.elements = [
+ 				{
+ 					"id":"test",
+ 					"nom":"test"			
+ 				},
+ 				{
+ 					"id":"test1",
+ 					"nom":"test1"			
+ 				},
+ 				{
+ 					"id":"test2",
+ 					"nom":"test2"			
+ 				}
+ 			
+ 			]
+			
+			
+		service.openDatabase = openDatabase;
         service.addElement = addElement;
 		service.suppElement = suppElement;
 		service.populateDB = populateDB;
 		service.showDocCount = showDocCount;
+		
+		
+		
+        
 		
         return service;
 
@@ -36,9 +52,15 @@
 		}
 		
 		
+		function openDatabase()
+		{
+			db = window.openDatabase("Database", "1.0", "Cordova Demo", 200000);
+			db.transaction(populateDB, errorCB, successCB);
+			showDocCount(db);
+		}
 		
 		function populateDB(tx) {
-			//tx.executeSql('DROP TABLE IF EXISTS DEMO');
+			tx.executeSql('DROP TABLE IF EXISTS DEMO');
 			tx.executeSql('CREATE TABLE IF NOT EXISTS DEMO (id unique, nom)');
 			tx.executeSql('INSERT INTO DEMO (id, nom) VALUES (1, "test1")');
 			tx.executeSql('INSERT INTO DEMO (id, nom) VALUES (2, "test2")');
@@ -47,17 +69,25 @@
 		}
 		
 		function errorCB(err) {
-			alert("Error processing SQL: "+err.code);
+			console.log("Erreur de creation de la table code : "+err.code);
 		}
 		
 		function successCB() {
-			alert("success!");
+			console.log("Succes de creation de la table");
 		}
 		
 		function showDocCount(db) {
 		db.readTransaction(function (t) {
 			t.executeSql('SELECT * FROM DEMO', [], function (t, r) {
-			return r.rows;
+				var i;
+				for (i = 0; i < r.rows.length; i++)
+				{
+					addElement(r.rows[i]);
+					
+				}
+					
+				
+			
 			}, function (t, e) {
 			// couldn't read database
 			console.log('erreur ' + e.message );
