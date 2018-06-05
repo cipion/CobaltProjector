@@ -13,9 +13,10 @@
 		vm.ajouterProjecteur = ajouterProjecteur;
 		vm.suprimerProjecteur = suprimerProjecteur;
 		vm.refresh = refresh;
+		vm.initList = initList;
 		
 		
-		$scope.elements = angular.copy(ProjecteurService.elements);
+		initList();
 		
 			
 			
@@ -87,6 +88,14 @@
 			$scope.elements = angular.copy(ProjecteurService.elements);
 		}
 		
+		
+		function initList ()
+		{
+			ProjecteurService.openDatabase(function(){
+				refresh();
+			});
+			
+		}
 		
 		
 		
