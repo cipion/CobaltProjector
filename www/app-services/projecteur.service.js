@@ -64,7 +64,7 @@
 		}
 		
 		function populateDB(tx) {
-			tx.executeSql('DROP TABLE IF EXISTS DEMO');
+			// tx.executeSql('DROP TABLE IF EXISTS DEMO');
 			tx.executeSql('CREATE TABLE IF NOT EXISTS DEMO (id unique, nom)');
 			tx.executeSql('INSERT INTO DEMO (id, nom) VALUES (1, "test1")');
 			tx.executeSql('INSERT INTO DEMO (id, nom) VALUES (2, "test2")');
@@ -87,6 +87,7 @@
 				for (i = 0; i < r.rows.length; i++)
 				{
 					addElement(r.rows[i]);
+					// addElement({ "id":"test", "nom":"test"});
 					
 				}
 				callback();	

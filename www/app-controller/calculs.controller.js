@@ -87,6 +87,7 @@
 		{
 			$scope.elements = angular.copy(ProjecteurService.elements);
 			console.log($scope.elements);
+			$scope.$apply();
 		}
 		
 		
