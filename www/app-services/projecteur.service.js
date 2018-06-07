@@ -54,22 +54,39 @@
 		
 		function openDatabase(resultat)
 		{
-			db = window.openDatabase("Database", "1.0", "Cordova Demo", 200000);
-			db.transaction(populateDB, errorCB, successCB);
-			showDocCount(db, function() {
-				resultat();			
-			});
+			if (!('indexedDB' in window)) {
+				window.indexedDB = window.mozIndexedDB || window.webkitIndexedDB || window.msIndexedDB;
+			}
+	
+			var req = indexedDB.open("demo", 1);
+
+			req.onsuccess = function(e) {
+				db = e.target.result;
+				db.transaction(populateDB, errorCB, successCB);
+				
+				showDocCount(db, function() {
+					resultat();			
+				});
+				
+			};
+			
+			
+			
 			
 			
 		}
 		
 		function populateDB(tx) {
-			// tx.executeSql('DROP TABLE IF EXISTS DEMO');
-			tx.executeSql('CREATE TABLE IF NOT EXISTS DEMO (id unique, nom)');
-			tx.executeSql('INSERT INTO DEMO (id, nom) VALUES (1, "test1")');
-			tx.executeSql('INSERT INTO DEMO (id, nom) VALUES (2, "test2")');
-			tx.executeSql('INSERT INTO DEMO (id, nom) VALUES (3, "test3")');
-			tx.executeSql('INSERT INTO DEMO (id, nom) VALUES (4, "test4")');
+		
+			var elem = {
+               book: book,
+               pdf_file: null
+             }
+			 
+			db.transaction("demo", "readwrite").objectStore("demo").put(elem, book[3]);
+			
+			
+			
 		}
 		
 		function errorCB(err) {
