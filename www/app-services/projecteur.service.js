@@ -14,21 +14,7 @@
 		var openRequest;
 		var objectStore;
 		
-		service.elements = [
- 				{
- 					"id":"test",
- 					"nom":"test"			
- 				},
- 				{
- 					"id":"test1",
- 					"nom":"test1"			
- 				},
- 				{
- 					"id":"test2",
- 					"nom":"test2"			
- 				}
- 			
- 			]
+		service.elements = [];
 			
 			
 		service.openDatabase = openDatabase;
@@ -44,15 +30,25 @@
         return service;
 
         
-		function addElement(element)
+		function addElement(id, value)
 		{
-			service.elements.push(element);
+			var element = '{"id":"' + id + '", "nom":"' + value.nom + '"}'; 
+			
+			service.elements.push(JSON.parse(element));
 		
 		}
 		
-		function suppElement(indexElement)
+		function suppElement(indexElement, nomElement)
 		{
-			service.elements.splice(indexElement, 1);
+			
+			var request = db.transaction(["projecteurs"], "readwrite")
+							.objectStore("projecteurs")
+							.delete(nomElement);
+							
+			request.onsuccess = function(event) {
+				service.elements.splice(indexElement, 1);
+				console.log("Element supprimé");
+			};
 		}
 		
 		
@@ -80,7 +76,7 @@
 					console.log("I need to make the projecteurs objectstore");
 					var objectStore = thisDb.createObjectStore("projecteurs", 
 						{ keyPath: "id", autoIncrement:true });  
-					objectStore.createIndex("title", "title", 
+					objectStore.createIndex("nom", "nom", 
 						{ unique: false });
 				}
 			}
@@ -103,8 +99,8 @@
 							req.onsuccess = function () {
 								var ob = db.createObjectStore("projecteurs",
 										{ keyPath: "id", autoIncrement:true });  
-								ob.createIndex("title", 
-										"title", { unique: false });
+								ob.createIndex("nom", 
+										"nom", { unique: false });
 								var trans = req.result;
 								trans.oncomplete = function(e) {
 								console.log("== trans oncomplete ==");
@@ -151,7 +147,7 @@
 			
 			objectStore = transaction.objectStore("projecteurs");
 			//use put versus add to always write, even if exists
-			var request = objectStore.add( {title:"projecteur 1",
+			var request = objectStore.add( {nom:"projecteur 1",
 				puissance: Math.floor(Math.random()*10000),
 				tension: 230,
 				courant: 5,
@@ -178,7 +174,7 @@
 		objectStore.openCursor().onsuccess = function(event) {  
 				var cursor = event.target.result;  
 				if (cursor) {  
-				addElement(cursor);
+				addElement(cursor.key, cursor.value);
 				cursor.continue();  
 				}  
 				else {  

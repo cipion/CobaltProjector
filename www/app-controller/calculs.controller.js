@@ -72,13 +72,13 @@
 			
 		};
 		
-		function suprimerProjecteur(objectDelete) {
+		function suprimerProjecteur(index, id) {
 			console.log('suppression');
 			//Ouverture de la fenêtre
 			
 			// delete elements[objectDelete];
 			
-			ProjecteurService.suppElement(objectDelete);
+			ProjecteurService.suppElement(index, id);
 			refresh();
 		};
 		
