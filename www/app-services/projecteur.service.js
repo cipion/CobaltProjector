@@ -38,12 +38,12 @@
 		
 		}
 		
-		function suppElement(indexElement, nomElement)
+		function suppElement(indexElement, idElement)
 		{
 			
 			var request = db.transaction(["projecteurs"], "readwrite")
 							.objectStore("projecteurs")
-							.delete(nomElement);
+							.delete(idElement);	
 							
 			request.onsuccess = function(event) {
 				service.elements.splice(indexElement, 1);
@@ -76,8 +76,8 @@
 					console.log("I need to make the projecteurs objectstore");
 					var objectStore = thisDb.createObjectStore("projecteurs", 
 						{ keyPath: "id", autoIncrement:true });  
-					objectStore.createIndex("nom", "nom", 
-						{ unique: false });
+					objectStore.createIndex("id", "id", 
+						{ unique: false, autoIncrement: true });
 				}
 			}
 	
@@ -99,8 +99,8 @@
 							req.onsuccess = function () {
 								var ob = db.createObjectStore("projecteurs",
 										{ keyPath: "id", autoIncrement:true });  
-								ob.createIndex("nom", 
-										"nom", { unique: false });
+								ob.createIndex("id", 
+										"id", { unique: false, autoIncrement: true });
 								var trans = req.result;
 								trans.oncomplete = function(e) {
 								console.log("== trans oncomplete ==");

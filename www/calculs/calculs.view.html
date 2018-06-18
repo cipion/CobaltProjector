@@ -11,7 +11,7 @@
 						<li ng-repeat="element in elements " >
 							<div class="row blue darken-3 ">
 								<a class="waves-effect waves-light  blue darken-3 left titreElement" style="text-color:black;" href="#!/calculs" id="{{element.id}}" ng-click="vm.element()" ng-bind="element.nom"></a>
-								<a class="btn-floating btn-small waves-effect waves-light red delete right" ng-click="vm.suprimerProjecteur($index, element.nom)"><i class="material-icons ">clear</i></a>
+								<a class="btn-floating btn-small waves-effect waves-light red delete right" ng-click="vm.suprimerProjecteur($index, element.id)"><i class="material-icons ">clear</i></a>
 							
 							</div>
 						</li>
