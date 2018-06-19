@@ -36,7 +36,7 @@
 					$scope.ajouter = function() {
 						//On fait appel à la fonction du scope parent qui permet de supprimer l'élément.
 						//On peut également faire appel à un service de notre application.
-						ProjecteurService.addElement({"id":$scope.nomProjecteur, "nom":$scope.nomProjecteur});
+						ProjecteurService.addElement({"nom":$scope.nomProjecteur, "tension":$scope.tensionProjecteur, "courant":$scope.courantProjecteur, "phase":$scope.phaseProjecteur, "puissance":$scope.puissanceProjecteur});
 						//Fermeture de la fenêtre modale
 						
 						refresh();
@@ -78,8 +78,10 @@
 			
 			// delete elements[objectDelete];
 			
-			ProjecteurService.suppElement(index, id);
-			refresh();
+			ProjecteurService.suppElement(index, id, function(){
+				refresh();
+			});
+			
 		};
 		
 		

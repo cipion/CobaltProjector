@@ -30,24 +30,52 @@
         return service;
 
         
-		function addElement(id, value)
+		function addElement(value)
 		{
-			var element = '{"id":"' + id + '", "nom":"' + value.nom + '"}'; 
+			var element = {"nom":value.nomProjecteur, "tension":value.tensionProjecteur, "courant":value.courantProjecteur, "phase":value.phaseProjecteur, "puissance":value.puissanceProjecteur}; 
 			
-			service.elements.push(JSON.parse(element));
+			service.elements.push(element);
+			
+			var transaction = db.transaction(["projecteurs"], "readwrite");  
+			transaction.oncomplete = function(event) {
+				console.log("All done!");
+			};
+		
+			transaction.onerror = function(event) {
+				// Don't forget to handle errors!
+				console.dir(event);
+			};
+			
+			objectStore = transaction.objectStore("projecteurs");
+			//use put versus add to always write, even if exists
+			var request = objectStore.add( {nom:"projecteur 1",
+				puissance: Math.floor(Math.random()*10000),
+				tension: 230,
+				courant: 5,
+				phase: "mono"});
+		
+			request.onsuccess = function(event) {
+				console.log("done with insert");
+			};
 		
 		}
 		
-		function suppElement(indexElement, idElement)
+		function suppElement(indexElement, idElement, callback)
 		{
 			
 			var request = db.transaction(["projecteurs"], "readwrite")
 							.objectStore("projecteurs")
-							.delete(idElement);	
+							.delete(Number(idElement));	
+							
+			console.log(request);
 							
 			request.onsuccess = function(event) {
 				service.elements.splice(indexElement, 1);
 				console.log("Element supprimé");
+				callback();
+			};
+			request.onerror = function(event) {
+				console.log("Erreur de suppression");
 			};
 		}
 		
@@ -77,7 +105,7 @@
 					var objectStore = thisDb.createObjectStore("projecteurs", 
 						{ keyPath: "id", autoIncrement:true });  
 					objectStore.createIndex("id", "id", 
-						{ unique: false, autoIncrement: true });
+						{ unique: true, autoIncrement: true });
 				}
 			}
 	
@@ -100,7 +128,7 @@
 								var ob = db.createObjectStore("projecteurs",
 										{ keyPath: "id", autoIncrement:true });  
 								ob.createIndex("id", 
-										"id", { unique: false, autoIncrement: true });
+										"id", { unique: true, autoIncrement: true });
 								var trans = req.result;
 								trans.oncomplete = function(e) {
 								console.log("== trans oncomplete ==");
@@ -117,7 +145,7 @@
 					}
 					
 					
-					populateDB();
+					//populateDB();
 					
 					showDocCount(function(){
 						resultat();
