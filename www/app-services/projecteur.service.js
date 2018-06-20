@@ -30,9 +30,9 @@
         return service;
 
         
-		function addElement(value)
+		function addElement(value, callback)
 		{
-			var element = {"nom":value.nomProjecteur, "tension":value.tensionProjecteur, "courant":value.courantProjecteur, "phase":value.phaseProjecteur, "puissance":value.puissanceProjecteur}; 
+			var element = {"nom":value.nom, "tension":value.tension, "courant":value.courant, "phase":value.phase, "puissance":value.puissance}; 
 			
 			service.elements.push(element);
 			
@@ -56,6 +56,7 @@
 		
 			request.onsuccess = function(event) {
 				console.log("done with insert");
+				callback();
 			};
 		
 		}

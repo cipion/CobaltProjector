@@ -36,11 +36,15 @@
 					$scope.ajouter = function() {
 						//On fait appel à la fonction du scope parent qui permet de supprimer l'élément.
 						//On peut également faire appel à un service de notre application.
-						ProjecteurService.addElement({"nom":$scope.nomProjecteur, "tension":$scope.tensionProjecteur, "courant":$scope.courantProjecteur, "phase":$scope.phaseProjecteur, "puissance":$scope.puissanceProjecteur});
+						var element = {"nom":$scope.nomProjecteur, "tension":$scope.tensionProjecteur, "courant":$scope.courantProjecteur, "phase":$scope.phaseProjecteur, "puissance":$scope.puissanceProjecteur};
+						ProjecteurService.addElement(element, function(){
+							refresh();
+							$uibModalInstance.close();
+						
+						});
 						//Fermeture de la fenêtre modale
 						
-						refresh();
-						$uibModalInstance.close();
+						
 					};
 					$scope.cancel = function() {
 						// Appel à la fonction d'annulation.

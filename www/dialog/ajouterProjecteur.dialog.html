@@ -5,23 +5,30 @@
 
 	<div class="row">
 			<div class="input-field col s12">
-					<input  id="nomProjecteur" name="nomProjecteur" type="text"  placeholder="nom du Projecteur" ng-model="nomProjecteur"  required />
+					<input  id="nomProjecteur" name="nomProjecteur" type="text"  placeholder="nom du Projecteur" ng-model="nomProjecteur"   />
 					<span ng-show="nomProjecteur.$touched && nomProjecteur.$invalid">Le nom du projecteur est necessaire.</span>
 			</div>
 			<div class="input-field col s12">
-					<input  id="puissanceProjecteur" name="puissanceProjecteur" type="text"  placeholder="puissance du Projecteur" ng-model="puissanceProjecteur"  required />
+					<input  id="puissanceProjecteur" name="puissanceProjecteur" type="number"  placeholder="puissance du Projecteur" ng-model="puissanceProjecteur"   />
 					<span ng-show="puissanceProjecteur.$touched && puissanceProjecteur.$invalid">La puissance du projecteur est necessaire.</span>
 			</div>
 			<div class="input-field col s12">
-					<input  id="nomProjecteur" name="courantProjecteur" type="text"  placeholder="courant du Projecteur" ng-model="courantProjecteur"  required />
+					<input  id="courantProjecteur" name="courantProjecteur" type="number"  placeholder="courant du Projecteur" ng-model="courantProjecteur"   />
 					
 			</div>
 			<div class="input-field col s12">
-					<input  id="nomProjecteur" name="tensionProjecteur" type="text"  placeholder="tension du Projecteur" ng-model="tensionProjecteur"  required />
-					<span ng-show="tensionProjecteur.$touched && tensionProjecteur.$invalid">La tension du projecteur est necessaire.</span>
+					<select>
+						<option ng-model="tensionProjecteur" id="tensionProjecteur" name="tensionProjecteur" value=""  selected>tension du Projecteur</option>
+						<option value="1">230</option>
+						<option value="2">380</option>
+					</select>
 			</div>
 			<div class="input-field col s12">
-					<input  id="phaseProjecteur" name="phaseProjecteur" type="text"  placeholder="mono ou triphasé" ng-model="phaseProjecteur"  required />
+					<select>
+						<option ng-model="phaseProjecteur" id="phaseProjecteur" name="phaseProjecteur" value=""  selected>mono ou triphasé</option>
+						<option value="1">monophasé</option>
+						<option value="2">triphasé</option>
+					</select>
 					
 			</div>
 			
@@ -31,7 +38,7 @@
 <div class="modal-footer">
 	<div class="row">
 		<div class="col s6">
-			<button class="btn btn-small blue darken-3 btnDialog" ng-click="ajouter()" ng-disabled="!nomProjecteur.length | !tensionProjecteur.length | !puissanceProjecteur.length">Confirmer</button>
+			<button class="btn btn-small blue darken-3 btnDialog" ng-click="ajouter()" ng-disabled="!nomProjecteur.length && !tensionProjecteur.length && !puissanceProjecteur.length">Confirmer</button>
 		</div>
 		<div class="col s6">
 			<button class="btn btn-small red lighten-1 btnDialog" ng-click="cancel()">Annuler</button>
