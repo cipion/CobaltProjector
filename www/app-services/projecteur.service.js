@@ -103,7 +103,7 @@
 				//Create projecteurs
 				if(!thisDb.objectStoreNames.contains("projecteurs")) {
 					console.log("I need to make the projecteurs objectstore");
-					var objectStore = thisDb.createObjectStore("projecteurs", 
+					objectStore = thisDb.createObjectStore("projecteurs", 
 						{ keyPath: "id", autoIncrement:true });  
 					objectStore.createIndex("id", "id", 
 						{ unique: true, autoIncrement: true });
@@ -199,12 +199,18 @@
 		}
 		
 		function showDocCount(callback) {
-				
+		
+		var transaction = db.transaction(["projecteurs"], "readwrite");
+		objectStore = transaction.objectStore("projecteurs");
+		
 		objectStore.openCursor().onsuccess = function(event) {  
 				var cursor = event.target.result;  
-				if (cursor) {  
-				addElement(cursor.key, cursor.value);
-				cursor.continue();  
+				if (cursor) { 
+					var element = {"nom":cursor.value.nom, "tension":cursor.value.tension, "courant":cursor.value.courant, "phase":cursor.value.phase, "puissance":cursor.value.puissance}; 
+			
+					service.elements.push(element);
+				
+					cursor.continue();  
 				}  
 				else {  
 				console.log("Done with cursor");
