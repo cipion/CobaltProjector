@@ -32,9 +32,6 @@
         
 		function addElement(value, callback)
 		{
-			var element = {"nom":value.nom, "tension":value.tension, "courant":value.courant, "phase":value.phase, "puissance":value.puissance}; 
-			
-			service.elements.push(element);
 			
 			var transaction = db.transaction(["projecteurs"], "readwrite");  
 			transaction.oncomplete = function(event) {
@@ -48,15 +45,19 @@
 			
 			objectStore = transaction.objectStore("projecteurs");
 			//use put versus add to always write, even if exists
-			var request = objectStore.add( {nom:"projecteur 1",
-				puissance: Math.floor(Math.random()*10000),
-				tension: 230,
-				courant: 5,
-				phase: "mono"});
+			var request = objectStore.add( {nom:value.nom,
+				puissance: value.puissance,
+				tension: value.tension,
+				courant: value.courant,
+				phase: value.phase});
 		
 			request.onsuccess = function(event) {
 				console.log("done with insert");
-				callback();
+				
+				showDocCount(function(){
+						callback();
+					});
+				
 			};
 		
 		}
@@ -73,7 +74,9 @@
 			request.onsuccess = function(event) {
 				service.elements.splice(indexElement, 1);
 				console.log("Element supprimé");
-				callback();
+				showDocCount(function(){
+						callback();
+					});
 			};
 			request.onerror = function(event) {
 				console.log("Erreur de suppression");
@@ -199,6 +202,7 @@
 		}
 		
 		function showDocCount(callback) {
+		service.elements = [];
 		
 		var transaction = db.transaction(["projecteurs"], "readwrite");
 		objectStore = transaction.objectStore("projecteurs");
@@ -206,7 +210,7 @@
 		objectStore.openCursor().onsuccess = function(event) {  
 				var cursor = event.target.result;  
 				if (cursor) { 
-					var element = {"nom":cursor.value.nom, "tension":cursor.value.tension, "courant":cursor.value.courant, "phase":cursor.value.phase, "puissance":cursor.value.puissance}; 
+					var element = {"nom":cursor.value.nom, "tension":cursor.value.tension, "courant":cursor.value.courant, "phase":cursor.value.phase, "puissance":cursor.value.puissance, "id":cursor.value.id}; 
 			
 					service.elements.push(element);
 				
