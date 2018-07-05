@@ -9,30 +9,35 @@
 					<span ng-show="nomProjecteur.$touched && nomProjecteur.$invalid">Le nom du projecteur est necessaire.</span>
 			</div>
 			<div class="input-field col s12">
-					<input  id="puissanceProjecteur" name="puissanceProjecteur" type="number"  placeholder="puissance du Projecteur" ng-model="puissanceProjecteur"   />
+					<input  id="puissanceProjecteur" name="puissanceProjecteur" type="number"  placeholder="puissance du Projecteur" ng-model="puissanceProjecteur"   integer/>
 					<span ng-show="puissanceProjecteur.$touched && puissanceProjecteur.$invalid">La puissance du projecteur est necessaire.</span>
 			</div>
 			<div class="input-field col s12">
-					<input  id="courantProjecteur" name="courantProjecteur" type="number"  placeholder="courant du Projecteur" ng-model="courantProjecteur"   />
+					<input  id="courantProjecteur" name="courantProjecteur" type="number"  placeholder="courant du Projecteur" ng-model="courantProjecteur"  integer />
 					
 			</div>
 			<div class="input-field col s12">
-    <select>
-      <option value="" disabled selected>Choose your option</option>
-      <option value="1">Option 1</option>
-      <option value="2">Option 2</option>
-      <option value="3">Option 3</option>
-    </select>
-    <label>Materialize Select</label>
-  </div>
+				<md-input-container>
+					<md-select ng-model="tensionProjecteur" id="tensionProjecteur" name="tensionProjecteur" class="tension">
+						<md-option><em>None</em></md-option>
+						<md-option ng-repeat="tension in vm.data.tensions" ng-value="tension" ng-disabled="$index === 1">
+							{{tension}}
+						</md-option>
+					</md-select>
+					<label>Tension du Projecteur</label>
+				</md-input-container>
+			</div>
 			<div class="input-field col s12">
-					<select>
-						<option ng-model="phaseProjecteur" id="phaseProjecteur" name="phaseProjecteur" value=""  selected>mono ou triphasé</option>
-						<option value="1">monophasé</option>
-						<option value="2">triphasé</option>
+					<select ng-model="phaseProjecteur" id="phaseProjecteur" name="phaseProjecteur" class="phase">
+						<option value="" disabled selected>mono ou triphasé</option>
+						<option value="monophasé">monophasé</option>
+						<option value="triphasé">triphasé</option>
 					</select>
+					<label>Phase du projecteur</label>
 					
 			</div>
+			
+			<div><tt>tensionProjecteur = {{tensionProjecteur}} ,phaseProjecteur = {{phaseProjecteur}}</tt></div>
 			
 	</div>
 </div>
@@ -47,3 +52,8 @@
 		</div>
 	</div>
 </div>
+
+<script>
+	$('.tension').formSelect();
+	$('.phase').formSelect();
+</script>

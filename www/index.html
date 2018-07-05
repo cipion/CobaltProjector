@@ -13,13 +13,19 @@
 		 <!--Import Google Icon Font-->
 		<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 		<!--Import materialize.css-->
-		<link rel="stylesheet" href="css/materialize.min.css">
+		<link type="text/css" rel="stylesheet" href="css/materialize.min.css" media="screen,projection">
 		
+		 
+		<!--Let browser know website is optimized for mobile-->
+		<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+	  
 		<!--Project css-->
 		<link rel="stylesheet" type="text/css" href="css/style.css">
 		
 		
         <title>Cobalt&nbsp;Projector</title>
+		
     </head>
     <body>
         	
@@ -29,8 +35,9 @@
 				
 				
 				
+        
 				
-				<a href="#" data-activates="mobile-demo" class="button-collapse show-on-large left"><i class="material-icons ">menu</i></a>
+				<a href="#" data-target="slide-out" class="button-collapse sidenav-trigger"><i class="material-icons ">menu</i></a>
 				<a href="#!" class="brand-logo" >Cobalt&nbsp;Projector </a>
 				<img src="img/logo.png" alt="Logo" class="brand-logo right" width="50" height="50">
 				
@@ -58,48 +65,30 @@
         </footer>
 		
 		
-		<ul class="side-nav grey" id="mobile-demo">
-					
-					<li class="sidenav-header blue">
-						<div class="row">
-							<div class="col s4">
-								<img src="" width="48px" height="48px" alt="" class="circle responsive-img valign profile-image">
-							</div>
-							<div class="col s8">
-								<a class="btn-flat dropdown-button waves-effect waves-light white-text" href="#" data-activates="profile-dropdown">NOM<i class="mdi-navigation-arrow-drop-down right"></i></a>
-								<ul id="profile-dropdown" class="dropdown-content">
-									<li><a href="#"><i class="material-icons">person</i>Profile</a></li>
-									<li><a href="#"><i class="material-icons">settings</i>Setting</a></li>
-									<li><a href="#"><i class="material-icons">help</i>Help</a></li>
-									<li class="divider"></li>
-									<li><a href="#"><i class="material-icons">lock</i>Lock</a></li>
-									<li><a href="#"><i class="material-icons">exit_to_app</i>Logout</a></li>
-								</ul>
-							</div>
-						</div>
-					</li>
-					
-					
-					<li class="blue darken-3"><a class="waves-effect waves-blue blue darken-3"  href="#!/calculs" >Calculs de puissance <i class="material-icons right">playlist_add</i></a></li>
-					
-					
-					
-					<li class="blue darken-3"><a class="waves-effect waves-blue blue darken-3"  href="#!/magasin" >Magasin<i class="material-icons right">local_grocery_store</i></a></li>
-					
-					
-					<li class="sidenav-footer grey"><div class="row"></div></li>
-					
-					<li class="sidenav-footer grey darken-2">								
-									<a href="mailto:thomas.gache@yahoo.fr">Contacter&nbsp;le&nbsp;support <i class="material-icons right">email</i></a>
-					</li>
-					
-		</ul>	
+		<ul id="slide-out" class="sidenav">
+			<li>
+				<div class="user-view">
+					<div class="background">
+						<img src="">
+					</div>
+					<a href="#user"><img class="circle" src=""></a>
+					<a href="#name"><span class="white-text name">John Doe</span></a>
+					<a href="#email"><span class="white-text email">jdandturk@gmail.com</span></a>
+				</div>
+			</li>
+			<li><a class="waves-effect waves-blue blue darken-3"  href="#!/calculs" >Calculs de puissance <i class="material-icons right">playlist_add</i></a></li>
+			<li><a class="waves-effect waves-blue blue darken-3"  href="#!/magasin" >Magasin<i class="material-icons right">local_grocery_store</i></a></li>
+			<li><div class="divider"></div></li>
+			<li><div class="row"></div></li>
+			<li><a href="mailto:thomas.gache@yahoo.fr">Contacter&nbsp;le&nbsp;support <i class="material-icons right">email</i></a></li>
+		</ul>
+				
 		
     </body>
 	
 		
-		<script type="text/javascript" src="js/jquery.min.js"></script>
-		<!--<script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>-->
+		<script type="text/javascript" src="js/jquery-3.3.1.js"></script>
+		<script type="text/javascript" src="js/jquery-ui.min.js"></script>
 		
 		<script type="text/javascript" charset="utf-8" src="cordova.js"></script>
 		<script type="text/javascript" charset="utf-8" src="cordova_plugins.js"></script>
