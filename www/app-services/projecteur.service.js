@@ -13,9 +13,12 @@
 		var dbVersion = 1.0;
 		var openRequest;
 		var objectStore;
+		var tensions = ["tension du Projecteur",230,380];
+		var phases = ["monophasé","triphasé"];
 		
 		service.elements = [];
-			
+		service.tensions = tensions;
+		service.phases = phases;
 			
 		service.openDatabase = openDatabase;
         service.addElement = addElement;

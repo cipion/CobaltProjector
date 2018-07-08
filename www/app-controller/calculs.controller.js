@@ -8,9 +8,9 @@
     CalculsController.$inject = ['$location', '$cookies', '$scope', '$uibModal', '$route', 'ProjecteurService'];
     function CalculsController($location, $cookies, $scope, $uibModal, $route, ProjecteurService) {
          var vm = this;
+		 
 		
-		vm.data.tensions = ["tension du Projecteur",230,380];
-		vm.data.phases = ["monophasé","triphasé"]
+		
 		vm.ajouterProjecteur = ajouterProjecteur;
 		vm.suprimerProjecteur = suprimerProjecteur;
 		vm.refresh = refresh;
@@ -32,8 +32,12 @@
 			backdrop: true,
 			keyboard: true,
 			animation: true,			
-			controller: ['$scope', '$uibModalInstance', 'ProjecteurService', 'vm',
-				function($scope, $uibModalInstance, ProjecteurService, vm) { //Controller de la fenêtre. Il doit prend en paramètre tous les élèments du "resolve".
+			controller: ['$scope', '$uibModalInstance', 'ProjecteurService',
+				function($scope, $uibModalInstance, ProjecteurService) { //Controller de la fenêtre. Il doit prend en paramètre tous les élèments du "resolve".
+					
+					$scope.tensions = ProjecteurService.tensions;
+					$scope.phases = ProjecteurService.phases;
+					
 					$scope.ajouter = function() {
 						//On fait appel à la fonction du scope parent qui permet de supprimer l'élément.
 						//On peut également faire appel à un service de notre application.
