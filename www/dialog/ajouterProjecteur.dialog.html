@@ -16,14 +16,17 @@
 					<input  id="courantProjecteur" name="courantProjecteur" type="number"  placeholder="courant du Projecteur" ng-model="courantProjecteur"  integer />
 					
 			</div>
+			
 			<div class="input-field col s12">
-					<md-select ng-model="tensionProjecteur" id="tensionProjecteur" name="tensionProjecteur" class="tension">
-						<md-option ng-repeat="tension in tensions" ng-value="tension" ng-disabled="$index === 1">
-							yo
-						</md-option>
-					</md-select>
-					<label>Tension du Projecteur</label>
+				<select class="tension">
+					<option value="" disabled selected>Choose your option</option>
+					<option ng-repeat="tension in tensions" ng-value="tension">{{tension}}</option>
+					
+				</select>
+				<label>Tension du projecteur</label>
 			</div>
+			
+			<!--
 			<div class="input-field col s12">
 					<select ng-model="phaseProjecteur" id="phaseProjecteur" name="phaseProjecteur" class="phase">
 						<option value="" disabled selected>mono ou triphasé</option>
@@ -34,7 +37,7 @@
 					
 			</div>
 			
-			<div><tt>tensionProjecteur = {{tensionProjecteur}} ,phaseProjecteur = {{phaseProjecteur}}</tt></div>
+			<!--<div><tt>tensionProjecteur = {{tensionProjecteur}} ,phaseProjecteur = {{phaseProjecteur}}</tt></div>-->
 			
 	</div>
 </div>

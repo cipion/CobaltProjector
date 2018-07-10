@@ -10,7 +10,6 @@
          var vm = this;
 		 
 		
-		
 		vm.ajouterProjecteur = ajouterProjecteur;
 		vm.suprimerProjecteur = suprimerProjecteur;
 		vm.refresh = refresh;
@@ -34,7 +33,7 @@
 			animation: true,			
 			controller: ['$scope', '$uibModalInstance', 'ProjecteurService',
 				function($scope, $uibModalInstance, ProjecteurService) { //Controller de la fenêtre. Il doit prend en paramètre tous les élèments du "resolve".
-					
+					$('select').formSelect();
 					$scope.tensions = ProjecteurService.tensions;
 					$scope.phases = ProjecteurService.phases;
 					
@@ -59,7 +58,8 @@
 			],
 			resolve: {
 				
-			}
+			},
+			scope: $scope
 			};
 			
 			
