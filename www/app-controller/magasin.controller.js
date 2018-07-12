@@ -5,35 +5,51 @@
         .module('app')
         .controller('MagasinController', MagasinController);
 
-    MagasinController.$inject = ['$location', '$cookies', '$scope', '$uibModal', '$route'];
-    function MagasinController($location, $cookies, $scope, $uibModal, $route) {
+    MagasinController.$inject = ['$location', '$cookies', '$scope', '$uibModal', '$route', 'ProjecteurService'];
+    function MagasinController($location, $cookies, $scope, $uibModal, $route, ProjecteurService) {
          var vm = this;
+		 var idElement;
 		
-		var data = {};
-		vm.ajouterElement = ajouterElement;
-		vm.supprimerElement = supprimerElement;
+		vm.ajouterProjecteur = ajouterProjecteur;
+		vm.suprimerProjecteur = suprimerProjecteur;
+		vm.infoElement = infoElement;
+		vm.refresh = refresh;
+		vm.initList = initList;
+		
+		
+		initList();
+		// refresh();
 			
-            
-        
-		
-		
+			
+			
+			
 		/*******************************************************************
 								DIALOG
 		*******************************************************************/
 			
-		var dialogajouterElement = {
-			templateUrl: 'dialog/ajouterElement.dialog.html', // Url du template HTML
+		var dialogajouterProjecteur = {
+			templateUrl: 'dialog/ajouterProjecteur.dialog.html', // Url du template HTML
 			backdrop: true,
 			keyboard: true,
 			animation: true,			
-			controller: ['$scope', '$uibModalInstance', 'PieceService',
-				function($scope, $uibModalInstance, PieceService) { //Controller de la fenêtre. Il doit prend en paramètre tous les élèments du "resolve".
+			controller: ['$scope', '$uibModalInstance', 'ProjecteurService',
+				function($scope, $uibModalInstance, ProjecteurService) { //Controller de la fenêtre. Il doit prend en paramètre tous les élèments du "resolve".
+					$('select').formSelect();
+					$scope.tensions = ProjecteurService.tensions;
+					$scope.phases = ProjecteurService.phases;
+					
 					$scope.ajouter = function() {
 						//On fait appel à la fonction du scope parent qui permet de supprimer l'élément.
 						//On peut également faire appel à un service de notre application.
+						var element = {"nom":$scope.nomProjecteur, "tension":$scope.tensionProjecteur, "courant":$scope.courantProjecteur, "phase":$scope.phaseProjecteur, "puissance":$scope.puissanceProjecteur};
+						ProjecteurService.addElement(element, function(){
+							refresh();
+							$uibModalInstance.close();
 						
+						});
 						//Fermeture de la fenêtre modale
-						$uibModalInstance.close();
+						
+						
 					};
 					$scope.cancel = function() {
 						// Appel à la fonction d'annulation.
@@ -43,45 +59,34 @@
 			],
 			resolve: {
 				
-			}
+			},
+			scope: $scope
 			};
 			
 			
-		var dialogsupprimerElement = {
-			templateUrl: 'dialog/supprimerElement.dialog.html', // Url du template HTML
+			var dialogInfoProjecteur= {
+			templateUrl: 'dialog/infoProjecteur.dialog.html', // Url du template HTML
 			backdrop: true,
 			keyboard: true,
-			animation: false,			
-			controller: ['$scope', '$uibModalInstance', 'PieceService', 
-				function($scope, $uibModalInstance, PieceService) { //Controller de la fenêtre. Il doit prend en paramètre tous les élèments du "resolve".
-					 var $ctrl = this;
-					$scope.pieces = $cookies.getObject('pieces');
+			animation: true,			
+			controller: ['$scope', '$uibModalInstance', 'ProjecteurService',
+				function($scope, $uibModalInstance, ProjecteurService) { //Controller de la fenêtre. Il doit prend en paramètre tous les élèments du "resolve".
+					//Partage de donnees
+					var infoElement = ProjecteurService.getInfoElement(idElement);
+					$scope.nomProjecteur = infoElement;
 					
-					$ctrl.selected = {};
 					
-					$scope.supprimer = function() {
-						//On fait appel à la fonction du scope parent qui permet de supprimer l'élément.
-						//On peut également faire appel à un service de notre application.
-						
-						//Fermeture de la fenêtre modale
-						$uibModalInstance.close($ctrl.selected.piece);
-					};
 					$scope.cancel = function() {
 						// Appel à la fonction d'annulation.
 						$uibModalInstance.dismiss('cancel');
 					};
 				}
 			],
-			controllerAs: '$ctrl',
 			resolve: {
 				
-			}
+			},
+			scope: $scope
 			};
-			
-
-		
-		
-		
 		
 		/*******************************************************************
 								Function
@@ -92,29 +97,49 @@
 		
 		
 
-		function ajouterElement() {
+		function ajouterProjecteur() {
 			console.log('ajout');
 			//Ouverture de la fenêtre
-		$uibModal.open(dialogajouterElement);
+			$uibModal.open(dialogajouterProjecteur);
+			
+			
 			
 		};
 		
-		function supprimerElement() {
+		function suprimerProjecteur(index, id) {
 			console.log('suppression');
 			//Ouverture de la fenêtre
-		var instanceModalSupprimer = $uibModal.open(dialogsupprimerElement);
-		
-		
-		instanceModalSupprimer.result.then(function (pieceSupprimee) {
-			$scope.pieceSupprimee = 'La piece "' + pieceSupprimee.nom + '" a ete supprimee';
-				}, function () {
-			$log.info('Modal dismissed at: ' + new Date());
+			
+			// delete elements[objectDelete];
+			
+			ProjecteurService.suppElement(index, id, function(){
+				refresh();
 			});
+			
 		};
 		
 		
+		function refresh ()
+		{
+			$scope.elements = angular.copy(ProjecteurService.elements);
+			console.log($scope.elements);
+			$scope.$apply();
+		}
 		
 		
+		function initList ()
+		{
+			ProjecteurService.openDatabase(refresh);
+			
+		}
+		
+		function infoElement(id)
+		{
+			idElement = id;
+			console.log('info element id :' + idElement);
+			//Ouverture de la fenêtre
+			$uibModal.open(dialogInfoProjecteur);
+		}
 		
 		
     }

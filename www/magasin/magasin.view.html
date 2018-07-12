@@ -1,60 +1,36 @@
 <main class="main">
-			<div class="fixed-action-btn horizontal">
-				<a class="btn-floating btn-large red">
-				<i class="large material-icons">menu</i>
-				</a>
-				<ul>
-					
-					<li><a class="btn-floating yellow darken-1"><i class="material-icons">person</i></a></li>
-					
-				
-				</ul>
-			</div>
-		
-			<div class="card-panel center-align margin">
 			
+		
+			<div class="card-panel margin" >
+			
+			  <div class="center-align">
 				<span class="echec" style="color:red"  >{{errorMsg}}</span> 
-				<span class="echec" style="color:red"  >{{ projecteurSupprimee }}</span>
-				<div class="row">
-					
+				<span class="echec" style="color:red"  >{{ elementSupprime }}</span>
 				
-					<ul class="projecteurs">
-						<li ng-repeat="projecteur in projecteurs">
-							<div class="row  ">
-								<button class="waves-effect waves-light  btn-large " id="{{ projecteur.id_piece }}" ng-click="vm.projecteur()" ng-bind="projecteur.nom"><i class="material-icons right">lightbulb_outline</i></button>
-								
+				<ul class="element">
+						<li ng-repeat="element in elements " >
+							<div class="row blue darken-3 ">
+								<a class="waves-effect waves-light  blue darken-3 left titreElement" style="text-color:black;" id="{{element.id}}" ng-click="vm.infoElement(element.id)" ng-bind="element.nom"></a>
+								<a class="btn-floating btn-small waves-effect waves-light red delete right" ng-click="vm.suprimerProjecteur($index, element.id)"><i class="material-icons ">clear</i></a>
+							
 							</div>
 						</li>
-					</ul>
-					
-					
-					
-					
-				</div>
+				</ul>
+			  </div>	
 				
-				<div class="row">
-						<div class="input-field col s6">
-							<a class="waves-effect waves-light btn  modal-trigger amber darken-4" ng-click="vm.ajouterPiece()">Ajouter</a>
-							
-						</div>
-						<div class="input-field col s6">
-							<a class="waves-effect waves-light btn amber darken-4 modal-trigger"  ng-click="vm.supprimerPiece()">Supprimer</a>
-						</div>
-						
-				</div>
+			  <div class="addButton">
+				<a class="btn-floating  waves-effect waves-light light-blue " ng-click="vm.ajouterProjecteur()"><i class="large material-icons ">add</i></a>
+			  </div>
 				
-				<div class="row">
-						<div class="input-field col s12">
-							<a class="waves-effect waves-light btn blue" href="#!/home" >Retour</a>
-						</div>
-						
-				</div>
+			  <div class="center-align">
+				<a class="btn waves-effect waves-light green calculBtn">Calculer</a>
+			  </div>
 				
-			
+			</div>	
+
+
+			<div class="margin">
+				
 			</div>
-			
-			
-			
-			
 		
 </main>

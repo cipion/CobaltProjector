@@ -25,6 +25,7 @@
 		service.suppElement = suppElement;
 		service.populateDB = populateDB;
 		service.showDocCount = showDocCount;
+		service.getInfoElement = getInfoElement;
 		
 		
 		
@@ -139,33 +140,26 @@
 								var trans = req.result;
 								trans.oncomplete = function(e) {
 								console.log("== trans oncomplete ==");
-								displayNotes();
 								}
 							};
 						}
 						else {
-							displayNotes();
+							console.log("La versionest la même");
 						}
 					}
 					else {
-						displayNotes();
+						console.log("db.setVersion impossible");
 					}
 					
 					
 					//populateDB();
 					
-					showDocCount(function(){
-						resultat();
-					});
+					showDocCount(resultat);
 					
 			}
 			
 			
-			function displayNotes() {
-				console.log("TODO - print something nice on the page");
-			}
-			
-			
+						
 		}
 		
 		function populateDB() {
@@ -225,7 +219,13 @@
 				
 				callback();
 			}; 
-}
+		}
+		
+		function getInfoElement(idElement)
+		{
+			console.log("ProjecteurService : getInfoElement : id =" + idElement);
+			return "retour";
+		}
         
 
        

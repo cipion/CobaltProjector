@@ -21,8 +21,8 @@ var app = angular.module('app', ['ngRoute', 'ngCookies', 'ui.bootstrap']);
 app.config(function($routeProvider){
 	$routeProvider
 			.when('/home', {
-                controller: 'CalculsController',
-                templateUrl: 'calculs/calculs.view.html',
+                controller: 'MagasinController',
+                templateUrl: 'magasin/magasin.view.html',
                 controllerAs: 'vm'
             })
 			.when('/calculs', {
@@ -36,7 +36,7 @@ app.config(function($routeProvider){
                 templateUrl: 'magasin/magasin.view.html',
                 controllerAs: 'vm'
             })
-			
+		
             .otherwise({ 
 			redirectTo: '/chargement' 
 			
