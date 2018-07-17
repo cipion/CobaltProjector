@@ -3,18 +3,17 @@
 
     angular
         .module('app')
-        .controller('MagasinController', MagasinController);
+        .controller('CalculsController', CalculsController);
 
-    MagasinController.$inject = ['$location', '$cookies', '$scope', '$uibModal', '$route', 'ProjecteurService'];
-    function MagasinController($location, $cookies, $scope, $uibModal, $route, ProjecteurService) {
+    CalculsController.$inject = ['$location', '$cookies', '$scope', '$uibModal', '$route', 'ProjecteurService'];
+    function CalculsController($location, $cookies, $scope, $uibModal, $route, ProjecteurService) {
          var vm = this;
 		 var idElement;
 		
-		vm.ajouterProjecteur = ajouterProjecteur;
-		vm.suprimerProjecteur = suprimerProjecteur;
+		vm.rechercherProjecteur = rechercherProjecteur;
+		vm.suprimerElement = suprimerElement;
 		vm.infoElement = infoElement;
 		vm.refresh = refresh;
-		vm.initList = initList;
 		
 		
 		initList();
@@ -115,7 +114,7 @@
 			
 		};
 		
-		function suprimerProjecteur(index, id) {
+		function suprimerElement(index, id) {
 			console.log('suppression');
 			//Ouverture de la fenêtre
 			
@@ -135,12 +134,6 @@
 			$scope.$apply();
 		}
 		
-		
-		function initList ()
-		{
-			ProjecteurService.openDatabase(refresh);
-			
-		}
 		
 		function infoElement(id)
 		{
