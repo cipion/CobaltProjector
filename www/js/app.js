@@ -18,7 +18,7 @@ $(document).ready(function(){
   
 var app = angular.module('app', ['ngRoute', 'ngCookies', 'ui.bootstrap']);
 
-app.config(function($routeProvider){
+app.config(function($routeProvider, $qProvider){
 	$routeProvider
 			.when('/home', {
                 controller: 'MagasinController',
@@ -41,7 +41,9 @@ app.config(function($routeProvider){
 			redirectTo: '/chargement' 
 			
 			});
-			
+	
+
+    $qProvider.errorOnUnhandledRejections(false);
 			
 });
 
