@@ -221,10 +221,24 @@
 			}; 
 		}
 		
-		function getInfoElement(idElement)
+		function getInfoElement(idElement, callback)
 		{
 			console.log("ProjecteurService : getInfoElement : id =" + idElement);
-			return "retour";
+			
+			var transaction = db.transaction(["projecteurs"], "readwrite");
+			objectStore = transaction.objectStore("projecteurs");
+			var request = objectStore.get(idElement);
+			
+			request.onerror = function(event) {
+				console.log("Erreur lors de la recherche de l'obget id=" + idElement);
+				callback("Erreur de chargement");
+			};
+			request.onsuccess = function(event) {
+				console.log("Succes lors de la recherche de l'obget id=" + idElement + ", le nom du projecteur est " + request.result.nom);
+				callback(request.result);
+			};
+						
+			
 		}
         
 
