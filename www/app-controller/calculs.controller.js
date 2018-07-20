@@ -9,15 +9,20 @@
     function CalculsController($location, $cookies, $scope, $uibModal, $route, ProjecteurService) {
          var vm = this;
 		 var idElement;
+		 var listeProjecteur = [];
+		 var elements = [];
+
 		
 		vm.rechercherProjecteur = rechercherProjecteur;
 		vm.suprimerElement = suprimerElement;
 		vm.infoElement = infoElement;
 		vm.refresh = refresh;
+		vm.initListProjecteur = initListProjecteur;
+		vm.ajouterProjecteur = ajouterProjecteur;
 		
 		
-		initList();
-		// refresh();
+		initListProjecteur();
+		
 			
 			
 			
@@ -27,7 +32,7 @@
 		*******************************************************************/
 			
 		var dialogajouterProjecteur = {
-			templateUrl: 'dialog/ajouterProjecteur.dialog.html', // Url du template HTML
+			templateUrl: 'dialog/ajouterProjecteurCalcul.dialog.html', // Url du template HTML
 			backdrop: true,
 			keyboard: true,
 			animation: true,			
@@ -129,7 +134,7 @@
 		
 		function refresh ()
 		{
-			$scope.elements = angular.copy(ProjecteurService.elements);
+			$scope.elements = angular.copy(elements);
 			console.log($scope.elements);
 			$scope.$apply();
 		}
@@ -141,6 +146,17 @@
 			console.log('info element id :' + idElement);
 			//Ouverture de la fenêtre
 			$uibModal.open(dialogInfoProjecteur);
+		}
+		
+		function rechercherProjecteur(index)
+		{
+		
+		
+		}
+
+		function initListProjecteur ()
+		{
+			$scope.listeProjecteur = angular.copy(ProjecteurService.elements);
 		}
 		
 		
