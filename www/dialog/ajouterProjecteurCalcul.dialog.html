@@ -1,0 +1,36 @@
+<div class="modal-header"><h3>Ajout</h3></div>
+<div class="modal-body">
+
+	<p>Ajouter un element au calcul</p>
+
+	<div class="row" >
+			<div class="input-field col s12">
+					<select ng-model="phaseProjecteur" id="phaseProjecteur" name="phaseProjecteur" class="phase">
+						<option value="" disabled selected>mono ou triphasé</option>
+						<option value="monophasé">monophasé</option>
+						<option value="triphasé">triphasé</option>
+					</select>
+					<label>Phase du projecteur</label>
+					
+			</div>
+			
+			
+			
+	</div>
+</div>
+
+<div class="modal-footer">
+	<div class="row">
+		<div class="col s6">
+			<button class="btn btn-small blue darken-3 btnDialog" ng-click="ajouter()" ng-disabled="!nomProjecteur.length && !tensionProjecteur.length && !puissanceProjecteur.length">Confirmer</button>
+		</div>
+		<div class="col s6">
+			<button class="btn btn-small red lighten-1 btnDialog" ng-click="cancel()">Annuler</button>
+		</div>
+	</div>
+</div>
+
+<script>
+	$('.tension').formSelect();
+	$('.phase').formSelect();
+</script>

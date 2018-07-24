@@ -18,12 +18,15 @@
 			</div>
 			
 			<div class="input-field col s12">
-				<select class="tension">
-					<option value="" disabled selected>Choose your option</option>
-					<option ng-repeat="tension in tensions" ng-value="tension">{{tension}}</option>
-					
-				</select>
-				<label>Tension du projecteur</label>
+				
+				<form name="myForm">
+   					 <label for="repeatSelect">Tension du projecteur</label>
+    				<select name="repeatSelect" id="repeatSelect"  ng-options="tension for tension in tensions" ng-model="selected">
+      
+    				</select>
+    				
+ 				</form>
+				
 			</div>
 			
 			<!--

@@ -15,8 +15,14 @@
 		vm.infoElement = infoElement;
 		vm.refresh = refresh;
 		vm.initList = initList;
+
+/*
+		$('select').formSelect();
+					
+					$scope.tensions = ProjecteurService.tensions;
+					$scope.phases = ProjecteurService.phases;
 		
-		
+	*/	
 		initList();
 		// refresh();
 			
@@ -35,6 +41,7 @@
 			controller: ['$scope', '$uibModalInstance', 'ProjecteurService',
 				function($scope, $uibModalInstance, ProjecteurService) { //Controller de la fenêtre. Il doit prend en paramètre tous les élèments du "resolve".
 					$('select').formSelect();
+
 					$scope.tensions = ProjecteurService.tensions;
 					$scope.phases = ProjecteurService.phases;
 					
