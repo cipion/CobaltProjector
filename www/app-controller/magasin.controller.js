@@ -16,15 +16,14 @@
 		vm.refresh = refresh;
 		vm.initList = initList;
 
-/*
-		$('select').formSelect();
-					
-					$scope.tensions = ProjecteurService.tensions;
-					$scope.phases = ProjecteurService.phases;
 		
-	*/	
+		
+
+		$scope.array = [{ "value": 1, "text": "1st" }, { "value": 2, "text": "2nd" }];
+		
+		
 		initList();
-		// refresh();
+		
 			
 			
 			
@@ -40,11 +39,13 @@
 			animation: true,			
 			controller: ['$scope', '$uibModalInstance', 'ProjecteurService',
 				function($scope, $uibModalInstance, ProjecteurService) { //Controller de la fenêtre. Il doit prend en paramètre tous les élèments du "resolve".
-					$('select').formSelect();
+					
 
-					$scope.tensions = ProjecteurService.tensions;
+					$scope.tensions = ['230', '380'] ; //ProjecteurService.tensions;
 					$scope.phases = ProjecteurService.phases;
 					
+					
+
 					$scope.ajouter = function() {
 						//On fait appel à la fonction du scope parent qui permet de supprimer l'élément.
 						//On peut également faire appel à un service de notre application.
@@ -62,6 +63,8 @@
 						// Appel à la fonction d'annulation.
 						$uibModalInstance.dismiss('cancel');
 					};
+
+
 				}
 			],
 			resolve: {
