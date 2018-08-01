@@ -20,8 +20,8 @@
 			<div class="input-field col s12">
 				
 				<form name="myForm">
-   					 <label for="repeatSelect">Tension du projecteur</label>
-    				<select name="repeatSelect" id="repeatSelect"  ng-options="tension for tension in tensions" ng-model="selected">
+   					 <label for="tensionSelect">Tension du projecteur</label>
+    				<select name="tensionSelect" id="tensionSelect"  ng-options="tension for tension in tensions" ng-model="tensionSelected" style="display: block;">
       
     				</select>
     				
@@ -29,14 +29,13 @@
 				
 			</div>
 			
-			<!--
+			
 			<div class="input-field col s12">
-					<select ng-model="phaseProjecteur" id="phaseProjecteur" name="phaseProjecteur" class="phase">
-						<option value="" disabled selected>mono ou triphasé</option>
-						<option value="monophasé">monophasé</option>
-						<option value="triphasé">triphasé</option>
+				<form name="myForm">
+					<label for="phaseSelect">Phase du projecteur</label>
+					<select name="phaseSelect" id="phaseSelect"  ng-options="phase for phase in phases" ng-model="phaseSelected" style="display: block;">
 					</select>
-					<label>Phase du projecteur</label>
+				</form>
 					
 			</div>
 			
@@ -48,7 +47,7 @@
 <div class="modal-footer">
 	<div class="row">
 		<div class="col s6">
-			<button class="btn btn-small blue darken-3 btnDialog" ng-click="ajouter()" ng-disabled="!nomProjecteur.length && !tensionProjecteur.length && !puissanceProjecteur.length">Confirmer</button>
+			<button class="btn btn-small blue darken-3 btnDialog" ng-click="ajouter()" ng-disabled="(nomProjecteur.length > 0 && tensionProjecteur.length > 0 && puissanceProjecteur.length > 0) ? false : true">Confirmer</button>
 		</div>
 		<div class="col s6">
 			<button class="btn btn-small red lighten-1 btnDialog" ng-click="cancel()">Annuler</button>
@@ -56,7 +55,3 @@
 	</div>
 </div>
 
-<script>
-	$('.tension').formSelect();
-	$('.phase').formSelect();
-</script>

@@ -16,7 +16,9 @@
 		vm.refresh = refresh;
 		vm.initList = initList;
 
+
 		
+  		
 		
 
 		$scope.array = [{ "value": 1, "text": "1st" }, { "value": 2, "text": "2nd" }];
@@ -41,7 +43,12 @@
 				function($scope, $uibModalInstance, ProjecteurService) { //Controller de la fenêtre. Il doit prend en paramètre tous les élèments du "resolve".
 					
 
-					$scope.tensions = ['230', '380'] ; //ProjecteurService.tensions;
+					
+  		  			
+ 		 			
+					
+
+					$scope.tensions = ProjecteurService.tensions;
 					$scope.phases = ProjecteurService.phases;
 					
 					
