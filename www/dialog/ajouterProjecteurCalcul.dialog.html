@@ -5,12 +5,11 @@
 
 	<div class="row" >
 			<div class="input-field col s12">
-					<select ng-model="phaseProjecteur" id="phaseProjecteur" name="phaseProjecteur" class="phase">
-						<option value="" disabled selected>mono ou triphasé</option>
-						<option value="monophasé">monophasé</option>
-						<option value="triphasé">triphasé</option>
+				<form name="myForm">
+					<label for="projecteurSelect">Liste des projecteurs</label>
+					<select name="projecteurSelect" id="projecteurSelect"  ng-options="projecteur for projecteur in projecteurs" ng-model="projecteurSelect" style="display: block;">
 					</select>
-					<label>Phase du projecteur</label>
+				</form>
 					
 			</div>
 			

@@ -13,7 +13,7 @@
 		var dbVersion = 1.0;
 		var openRequest;
 		var objectStore;
-		var tensions = ["tension du Projecteur",230,380];
+		var tensions = [230,380];
 		var phases = ["monophasé","triphasé"];
 		
 		service.elements = [];
@@ -217,6 +217,10 @@
 				console.log("Done with cursor");
 				}  
 				
+				service.elements.sort(function (a, b) {
+  						return a.nom - b.nom;
+				}); // TODO ca ne trie pas car il faut un nom dans la liste
+
 				callback();
 			}; 
 		}
@@ -240,7 +244,8 @@
 						
 			
 		}
-        
+
+
 
        
     }

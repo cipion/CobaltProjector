@@ -39,13 +39,12 @@
 			controller: ['$scope', '$uibModalInstance', 'ProjecteurService',
 				function($scope, $uibModalInstance, ProjecteurService) { //Controller de la fenêtre. Il doit prend en paramètre tous les élèments du "resolve".
 					$('select').formSelect();
-					$scope.tensions = ProjecteurService.tensions;
-					$scope.phases = ProjecteurService.phases;
+					$scope.projecteurs = ProjecteurService.elements;
 					
 					$scope.ajouter = function() {
 						//On fait appel à la fonction du scope parent qui permet de supprimer l'élément.
 						//On peut également faire appel à un service de notre application.
-						var element = {"nom":$scope.nomProjecteur, "tension":$scope.tensionProjecteur, "courant":$scope.courantProjecteur, "phase":$scope.phaseProjecteur, "puissance":$scope.puissanceProjecteur};
+						var element = {"nom":$scope.projecteurSelect};
 						ProjecteurService.addElement(element, function(){
 							refresh();
 							$uibModalInstance.close();
